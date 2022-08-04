@@ -1,0 +1,31 @@
+{{! <div class="alert alert-danger sticky-top" role="alert"> }}
+{{! <form action="/logout" class="alert alert-success d-flex justify-content-between align-center"> }}
+<form class="alert alert-success d-flex justify-content-between align-center">
+  <div class="w-100 d-flex justify-content-between">
+    <h2 class="font-weight-bold">
+      Bienvenidx
+      {{username}}
+      !
+    </h2>
+    <div class="d-flex gap-4">
+      <div class="d-flex align-items-center">
+        <a style="color: inherit; text-decoration: none;" href="/cart">
+          <i class="fa-solid fa-cart-shopping fa-xl" title="Ver Carrito!"></i>
+          <span id="cartCont">
+            0
+          </span>
+        </a>
+      </div>
+      <div class="d-flex align-items-center">
+        <a style="color: inherit; text-decoration: none;" href="/useraccount">
+          <i class="fa-solid fa-user fa-xl" title="Tu Cuenta!"></i>
+        </a>
+      </div>
+      <div class="d-flex align-items-center">
+        <a style="color: inherit; text-decoration: none;" href="/logout">
+          <i class="fa-solid fa-sign-out fa-xl" title="LOGOUT!"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</form>

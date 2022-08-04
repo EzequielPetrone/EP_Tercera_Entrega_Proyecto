@@ -1,0 +1,38 @@
+{{#if productos}}
+  <div class="container p-3 d-flex gap-4 flex-wrap">
+    {{#each productos}}
+      <div class="card" style="width: 12rem;">
+        <img
+          class="card-img-top"
+          src="{{this.thumbnail}}"
+          alt="{{this.title}}"
+        />
+        <div class="card-body">
+          <h5 class="card-title">
+            {{this.nombre}}
+          </h5>
+          <p class="card-text">
+            $
+            {{this.precio}}
+          </p>
+          <p class="card-text">
+            {{this.descripcion}}
+          </p>
+          {{#if this.stock}}
+            <button prodId='{{this.id}}' class="btnAddToCart btn btn-primary">
+              Agregar a Carrito
+            </button>
+          {{else}}
+            <button disabled class="btn">
+              Sin Stock
+            </button>
+          {{/if}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{{else}}
+  <h3 id="noProd">
+    No hay productos creados aún...
+  </h3>
+{{/if}}

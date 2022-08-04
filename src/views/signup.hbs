@@ -1,0 +1,79 @@
+<div class="container p-3">
+  <h2 class="my-3">
+    SIGN UP
+  </h2>
+  <form
+    id="userForm"
+    class="form p-2"
+    role="form"
+    action="/signup"
+    method="post"
+  >
+    <div class="mb-3">
+      <label for="email" class="form-label">
+        Email
+      </label>
+      <input required type="text" class="form-control" name="email" />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">
+        Password
+      </label>
+      <input required type="password" class="form-control" name="password" />
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">
+        Nombre
+      </label>
+      <input required type="text" class="form-control" name="name" />
+    </div>
+    <div class="mb-3">
+      <label for="direccion" class="form-label">
+        Dirección
+      </label>
+      <input required type="text" class="form-control" name="direccion" />
+    </div>
+    <div class="mb-3">
+      <label for="nacimiento" class="form-label">
+        Fecha de Nacimiento
+      </label>
+      <input required type="date" class="form-control" name="nacimiento" />
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label">
+        Telefono
+      </label>
+      <input
+        required
+        id="phone"
+        type="tel"
+        class="form-control"
+        name="phone"
+        onchange="verifyPhone()"
+      />
+      <div class="alert alert-success phone-ok" style="display: none;"></div>
+      <div class="alert alert-danger phone-error" style="display: none;"></div>
+    </div>
+    <div class="mb-3">
+      <label for="avatar" class="form-label">
+        Avatar URL
+      </label>
+      <input required type="url" class="form-control" name="avatar" />
+    </div>
+    <button type="submit" class="btn btn-success">
+      SIGN UP
+    </button>
+  </form>
+  <hr />
+  <form action="/login" class="py-2">
+    <h3 class="my-2 pb-2">
+      ¿Ya tienes cuenta?
+    </h3>
+    <div class="px-2">
+      <button class="btn btn-primary my-2">
+        LOGIN
+      </button>
+    </div>
+  </form>
+</div>
+<script src="js/signup.js"></script>

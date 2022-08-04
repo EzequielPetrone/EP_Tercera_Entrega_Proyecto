@@ -1,0 +1,28 @@
+{
+  "name": "ep_tercera_entrega_proyecto",
+  "version": "1.0.0",
+  "description": "E-commerce | Tercera Entrega Parcial Proyecto Backend CH | EP",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Ezequiel Petrone",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "mongoose": "^6.5.0",
+    "nodemailer": "^6.7.7",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "twilio": "^3.80.0",
+    "winston": "^3.8.1",
+    "yargs": "^17.5.1"
+  }
+}

@@ -1,0 +1,16 @@
+{"level":"error","message":"Error al obtener objeto con id auth de la colección carritosProyecto...CastError: Cast to ObjectId failed for value \"auth\" (type string) at path \"_id\" for model \"carritosProyecto\""}
+{"level":"error","message":"Error al obtener objeto con id null de la colección carritosProyecto...id null"}
+{"level":"error","message":"Error al obtener objeto con id null de la colección carritosProyecto...id null"}
+{"level":"error","message":"Error al obtener objeto con id null de la colección carritosProyecto...id null"}
+{"level":"error","message":"Error al obtener objeto con id null de la colección carritosProyecto...id null"}
+{"level":"error","message":"No es posible actualizar stock del producto con id"}
+{"level":"error","message":"No es posible actualizar stock del producto con id"}
+{"level":"error","message":"No es posible actualizar stock del producto con id"}
+{"level":"error","message":"No es posible actualizar stock del producto con id"}
+{"level":"error","message":"No es posible actualizar stock del producto con id"}
+{"level":"error","message":"No es posible actualizar stock del producto con id"}
+{"level":"error","message":"Error al obtener objeto con id null de la colección carritosProyecto...id null"}
+{"level":"error","message":"Error al obtener objeto con id null de la colección carritosProyecto...id null"}
+{"level":"error","message":"Error al obtener objeto con id null de la colección carritosProyecto...id null"}
+{"level":"error","message":"Error al obtener objeto con id null de la colección carritosProyecto...id null"}
+{"level":"error","message":"Error al obtener objeto con id auth de la colección carritosProyecto...CastError: Cast to ObjectId failed for value \"auth\" (type string) at path \"_id\" for model \"carritosProyecto\""}
