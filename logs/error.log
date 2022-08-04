@@ -14,3 +14,4 @@
 {"level":"error","message":"Error al obtener objeto con id null de la colección carritosProyecto...id null"}
 {"level":"error","message":"Error al obtener objeto con id null de la colección carritosProyecto...id null"}
 {"level":"error","message":"Error al obtener objeto con id auth de la colección carritosProyecto...CastError: Cast to ObjectId failed for value \"auth\" (type string) at path \"_id\" for model \"carritosProyecto\""}
+{"code":63007,"level":"error","moreInfo":"https://www.twilio.com/docs/errors/63007","status":400}

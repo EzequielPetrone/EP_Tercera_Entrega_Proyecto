@@ -195,24 +195,22 @@ routerCarrito.post("/:id/checkout", async (req, res) => {
 
             // Envío mails relacionados con el checkout:
 
+            const notifText = 'Pedido finalizado! Gracias!\n' + JSON.stringify(result, null, 2)
+
             const mailOptions = {
                 from: '"ESDP Store!" <store@esdp.com>', // sender address
                 to: req.user.email,
-                bcc: MAIL_ADMIN,
+                bcc: MAIL_ADMIN, //con copia oculta
                 subject: "Cart Checkout!", // Subject line
-                text: JSON.stringify(result, null, 2), // plain text body
-                // html: '<h1 style="color:green">Contenido desde <span style="color:blue">Node</span> Eze lalita</h1>', // html body
+                text: notifText, // plain text body
+                // html: '<h1 style="color:green">Contenido desde <span style="color:blue">Node</span></h1>', // html body
             }
 
-            logger.info(await sendEmail(mailOptions))
+            sendEmail(mailOptions).then(resp => logger.info(resp))
 
             // Envío mensajes de WhatsApp:
 
-            const textWapp = 'Pedido finalizado! Gracias!' + JSON.stringify(result, null, 2)
-            logger.info(await sendWapp(PHONE_NUMBER_ADMIN, textWapp));
-            logger.info(await sendWapp(req.user.phone, textWapp));
-
-            // --------------------------------------------------------------------------------------------
+            sendWapp([PHONE_NUMBER_ADMIN, req.user.phone], notifText).then(resp => logger.info(resp))
 
             const response = await postCarrito(req.isAuthenticated() && req.user ? req.user.email : '')
 
