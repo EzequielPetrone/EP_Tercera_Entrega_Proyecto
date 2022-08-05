@@ -1,0 +1,48 @@
+<div class="container p-3">
+  <h2 class="my-3">
+    Datos de tu Cuenta:
+  </h2>
+  <div class="p-2">
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <label for="email">
+        Email
+      </label>
+      <input disabled value="{{email}}" type="text" class="form-control" name="email" />
+    </div>
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <label for="name">
+        Nombre
+      </label>
+      <input disabled value="{{nombre}}" type="text" class="form-control" name="name" />
+    </div>
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <label for="direccion">
+        Dirección
+      </label>
+      <input disabled value="{{direccion}}" type="text" class="form-control" name="direccion" />
+    </div>
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <label for="nacimiento">
+        Fecha de Nacimiento
+      </label>
+      <input disabled value="{{fechaNacimiento}}" type="date" class="form-control" name="nacimiento" />
+    </div>
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <label for="phone">
+        Telefono
+      </label>
+      <input disabled value="{{telefono}}" id="phone" type="tel" class="form-control" name="phone" />
+    </div>
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <label for="avatar">
+        Avatar
+      </label>
+      <img src="{{avatar}}" alt="Avatar img de {{nombre}}" style="width: 10rem;">
+    </div>
+  </div>
+  <form action="/" class="py-2">
+    <button class="btn btn-primary my-2">
+      VOLVER
+    </button>
+  </form>
+</div>

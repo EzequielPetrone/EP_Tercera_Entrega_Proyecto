@@ -9,8 +9,11 @@ Gracias tanto a los comentarios del código como a los errores que devuelve cada
 - Todas las vistas de la web son proporcionadas por el back.
 Pero el front maneja el render de los elementos dinámicos y todo lo que es interacción con el usuario.
 
-- Al momento del SIGNUP, para la imagen avatar del user por ahora pide ingresar una url de alguna imagen ya hosteada en algún lugar de la nube jajaja
+- Al momento del SIGNUP, para la imagen avatar del user por ahora pide ingresar una url de alguna imagen ya hosteada.
+
 TODO: implementar multer para qué el user pueda adjuntar un file y se guarde en public.
+
+- Si tuviese la posibilidad de dedicarle más tiempo, estaría bueno permitirle al user modificar sus datos personales...
 
 - Cuando un nuevo user se loguea, se crea automáticamente un carrito abierto asociado a dicho user.
 (Si un user se loguea y por algún motivo no cuenta con un carrito abierto asociado a su cuenta se le crea también...)
@@ -21,43 +24,51 @@ TODO: implementar multer para qué el user pueda adjuntar un file y se guarde en
 - Dado que yo no quería que esté expuesto en el front datos como el id de los carritos, lo que hice fue darle a los endpoints de api/carritos la inteligencia suficiente para reconocer al user authenticado y devolver la data de su carrito correspondiente.
 
 - Decidí manejar el ABM del maestro de productos por fuera de la web.
+(En caso que sea necesario se lo puedo incorporar)
 
 - Actualmente el sistema modifica el stock del maestro de productos cuando un user agrega / elimina productos a su carrito.
 Así lo tengo desde la primer entrega del proyecto porque entendí que es lo que pedía la descripción de la API rest.
-Mi duda es si así está bien o en realidad la baja del stock debe hacerse al momento del checkout.
-Aunque si lo hago al momento del checkout corro el riesgo de que en ese momento salte que no hay stock para cierto pedido.
-En fin, me gustaría saber qué conviene en un e-commerce real...
-TODO: limitar la qty de unidades que un user puede agregar de un producto para evitar quiebres de stock sin comprar...
-TODO: mejorar la interacción en las cards del front para que se puedan agregar y eliminar productos del carrito manejando cantidades (en vez de agregar de a uno y eliminar todo)
-TODO: cuando un producto se queda sin stock justo mientras lo estas agregando al carrito hoy el front muestra alert y hace un refresh del site. Debería ser más elegante...
 
-- Al momento del checkout lo único que hago es "cerrar" el carrito en cuestión y "abrir" un nuevo carrito vacío.
-TODO: en realidad ese cierre de carrito debería crear otra entidad llamada PEDIDO o algo por el estilo dentro de la BD (y eliminar el carrito cerrado)
+Mi duda es si así está bien o en realidad la baja del stock debe hacerse al momento del checkout.
+Aunque, si lo hago al momento del checkout, corro el riesgo de que en ese momento salte que no hay stock para cierto pedido.
+En fin, me gustaría saber qué conviene en un e-commerce real...
+
+TODO: limitar la qty de unidades que un user puede agregar de un producto para evitar quiebres de stock sin comprar...
+
+TODO: cuando un producto se queda sin stock justo mientras lo estas agregando al carrito hoy el front muestra alert y hace un refresh del site. Debería ser más friendly / elegante...
+
+- Al momento del checkout lo que hago es "cerrar" el carrito en cuestión y "abrir" un nuevo carrito vacío.
+(En realidad ese cierre de carrito debería crear otra entidad llamada PEDIDO o algo por el estilo dentro de la BD)
 
 - Actualmente el monto total que muestra el carrito lo calcula con el precio de los productos al momento que fue agregado al mismo.
-Está hecho así porque la descripción de la API de los entregables anteriores pedía que guardemos TODOS los datos del producto dentro del array del carrito.
+(Está hecho así porque la descripción de la API de los entregables anteriores pedía que guardemos TODOS los datos del producto dentro del array del carrito)
+
 Si yo haría el diseño, sólo guardaría SKU y qty en el carrito, y todo lo relacionado con el precio lo calcularía en tiempo real obteniendolo del maestro de productos!
 
 - Mails que el sistema envía:
+
 A) Al admin informando Nuevo registro con datos del new user.
+
 B) Al admin (bcc) y al mail registrado del user (to) con el checkout de su carrito
-(tener en cuenta que estoy usando ethereal por ende logueo la URL de visualización de los mails en cuestión pero en realidad no se envían)
+
+(Tener en cuenta que estoy usando ethereal por ende logueo la URL de visualización de los mails en cuestión pero en realidad no se envían)
+
 TODO: mejorar el HTML enviado. Actualmente estoy mandando un json así nomás en texto plano.
 
 - Mensajes de WhatsApp que el sistema envía:
+
 A) Al admin y al mail registrado del user con el checkout de su carrito
-(tener en cuenta que el trial de Twilio sólo te permite enviar a números de telefóno previamente registrados...)
+
+(Tener en cuenta que el trial de Twilio sólo te permite enviar a números de telefóno previamente registrados...)
+
 TODO: mejorar el contenido enviado. Actualmente estoy mandando un json así nomás en texto plano.
-TODO: ver si la api de Twilio me permite en una sola ejecución enviar el mismo msj a más de un destinatario.
 
 - El mail y el nro de teléfono del ADMIN del site están configurados en /src/config/config.js
 
-- El AuthToken de Twilio está en el .env 
-Antes de correr la app en forma local, editarlo! de ahí o en /src/config/config.js
-(cuando lo subí a GitHub hardcodeado en el código me mandaron un mail informando que me lo revocaban jajaja)
+- El AuthToken de Twilio está en el .env - Antes de correr la app en forma local, editarlo! de ahí o en /src/config/config.js
+(Cuando lo subí a GitHub hardcodeado en el código me mandaron un mail informando que me lo revocaban jajaja)
 
 - Cambié todos los console.log por mi logger Winston.
-TODO: Revisión gral...
 
 - TODO: habilitar modo CLUSTER
 

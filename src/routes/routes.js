@@ -133,13 +133,17 @@ router.get('/useraccount', (req, res) => {
     // Me falta crear la vista HTML aún...
 
     if (req.isAuthenticated()) {
+
         const usuario = {
             nombre: req.user.name,
             email: req.user.email,
-            avatar: req.user.avatar
+            avatar: req.user.avatar,
+            fechaNacimiento: req.user.nacimiento.toISOString().split("T")[0],
+            direccion: req.user.direccion,
+            telefono: req.user.phone
         }
-        // res.render('useraccount', usuario);
-        res.type('json').send(JSON.stringify(usuario, null, 2))
+        res.render('useraccount', usuario);
+        // res.type('json').send(JSON.stringify(usuario, null, 2))
     } else {
         res.redirect('/login');
     }

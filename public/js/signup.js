@@ -9,6 +9,7 @@ const phoneInput = window.intlTelInput(phoneInputField, {
 const userForm = document.querySelector('#userForm')
 
 userForm.addEventListener('submit', (e) => {
+
     if (phoneInput.isValidNumber()) {
         // Esto lo hago para que el código de país sea parte del tel
         phoneInputField.value = phoneInput.getNumber()
