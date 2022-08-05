@@ -81,7 +81,9 @@ Pendiente: mejorar el contenido enviado. Actualmente estoy mandando un json así
 
 Queda claro que en modo CLUSTER el ratio de qty de respuestas por segundo sube y la media del response time baja!
 
-- TODO: deploy en heroku
+- HEROKU:
+
+https://esdpstore.herokuapp.com/
 
 ## Primera Entrega:
 

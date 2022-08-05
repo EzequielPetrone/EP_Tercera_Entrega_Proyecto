@@ -12,7 +12,8 @@ import os from 'os'
 const numCPUs = os.cpus().length // Calculo qty de núcleos del proc
 
 const MONGO_URL = process.env.MONGO_URL || ''
-const PORT = parseInt(argv.port) || 8080
+// const PORT = parseInt(argv.port) || 8080
+const PORT = process.env.PORT || 8080
 const MODE = argv.mode || 'FORK'
 const EXP_TIME = parseInt(process.env.EXP_TIME) || (1000 * 60 * 10)
 const NUMCPUS = numCPUs || 1
