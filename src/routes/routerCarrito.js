@@ -12,7 +12,7 @@ import { MAIL_ADMIN, PHONE_NUMBER_ADMIN } from '../config/config.js';
 
 import { logger } from '../config/logger.js'; //Importo middlewares que utilizan el logger que configuré
 
-import { postCarrito } from '../utils/utils.js'
+import { postCarrito } from '../utils/funcionalidades.js'
 
 //Importo express y configuro Routers
 import { Router, json, urlencoded } from "express";
@@ -197,11 +197,13 @@ routerCarrito.post("/:id/checkout", async (req, res) => {
 
             const notifText = 'Pedido finalizado! Gracias!\n' + JSON.stringify(result, null, 2)
 
+            // En realidad habría que armar bien los cuerpos de los mails y de los mensajes de WhatsApp, por cuestiones de tiempo lo dejo así...
+
             const mailOptions = {
                 from: '"ESDP Store!" <store@esdp.com>', // sender address
                 to: req.user.email,
                 bcc: MAIL_ADMIN, //con copia oculta
-                subject: "Cart Checkout!", // Subject line
+                subject: `Nuevo pedido de ${req.user.name} <${req.user.email}>`, // Subject line
                 text: notifText, // plain text body
                 // html: '<h1 style="color:green">Contenido desde <span style="color:blue">Node</span></h1>', // html body
             }
@@ -211,6 +213,8 @@ routerCarrito.post("/:id/checkout", async (req, res) => {
             // Envío mensajes de WhatsApp:
 
             sendWapp([PHONE_NUMBER_ADMIN, req.user.phone], notifText).then(resp => logger.info(resp))
+
+            // Al cerrar exitosamente el carrito en cuestión, vuelvo a asignarle un nuevo carrito abierto vacío al user.
 
             const response = await postCarrito(req.isAuthenticated() && req.user ? req.user.email : '')
 

@@ -1,4 +1,5 @@
 //Muestra productos
+const checkoutBtn = document.querySelector('#checkoutBtn')
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -21,6 +22,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 cont += p.stock
                 monto += (p.precio * p.stock)
             }
+            checkoutBtn.disabled = false
+        } else {
+            checkoutBtn.disabled = true
         }
         cartCont.innerHTML = cont
         cartAmount.innerHTML = '$ ' + monto
@@ -46,9 +50,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 })
 
+const goHome = () => location.href = '/'
+
 const checkout = async () => {
 
-    const checkoutBtn = document.querySelector('#checkoutBtn')
     checkoutBtn.disabled = true
     checkoutBtn.innerHTML = 'PROCESANDO...'
 
@@ -59,10 +64,8 @@ const checkout = async () => {
     if (response.error) {
         alert(response.descripcion)
     } else {
-        alert(`Gracias por tu compra ${response.name}! Te van a llegar instrucciones al correo: ${response.email}`)
+        alert(`Gracias por tu compra ${response.name}! Te van a llegar las instrucciones de pago al correo: ${response.email}`)
     }
 
-    location.href = '/'
+    goHome()
 }
-
-const goHome = () => location.href = '/'

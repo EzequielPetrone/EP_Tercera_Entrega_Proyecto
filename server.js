@@ -12,7 +12,7 @@ import session from 'express-session';
 import handlebars from 'express-handlebars';
 import passport from 'passport';
 
-import { PORT, MODE, NUMCPUS, EXP_TIME } from './src/config/config.js' //Importo variables de config
+import { PORT, MODE, NUMCPUS, EXP_TIME, PASSPORT_SESSION_SECRET } from './src/config/config.js' //Importo variables de config
 
 import { logger, warnLogger } from './src/config/logger.js' //Importo logger que configuré
 
@@ -21,14 +21,10 @@ import router from './src/routes/routes.js';
 import routerProductos from './src/routes/routerProductos.js';
 import routerCarrito from './src/routes/routerCarrito.js';
 
-//Importo y seteo contenedor de productos
-import { ProductosDaoMongo } from './src/daos/productos/ProductosDaoMongo.js';
-const contenedorProd = new ProductosDaoMongo()
-
 import cluster from 'cluster'; // Importo cluster
 
 if (MODE == 'CLUSTER' && cluster.isPrimary) {
-    // console.log(`PID MASTER ${process.pid}`)
+    logger.info(`PID MASTER: ${process.pid}`)
 
     // Cuando el modo pasado por args es CLUSTER, el process MASTER lanza los workers, 1 por cada cpu
     for (let i = 0; i < NUMCPUS; i++) {
@@ -36,7 +32,7 @@ if (MODE == 'CLUSTER' && cluster.isPrimary) {
     }
 
     cluster.on('exit', worker => {
-        // console.log('Worker', worker.process.pid, 'died', new Date().toLocaleString())
+        logger.info(`Worker ${worker.process.pid} died! ${new Date().toLocaleString()}`)
         cluster.fork() //Si un worker muere levanto otro
     })
 
@@ -74,7 +70,7 @@ if (MODE == 'CLUSTER' && cluster.isPrimary) {
 
     //Configuro session e inicializo passport
     app.use(session({
-        secret: 'clave_test_eze',
+        secret: PASSPORT_SESSION_SECRET,
         cookie: {
             httpOnly: true,
             secure: false,
@@ -95,39 +91,10 @@ if (MODE == 'CLUSTER' && cluster.isPrimary) {
     //Gestiono rutas no parametrizadas
     app.use('*', warnLogger, (req, res) => res.status(404).render('routing-error', { originalUrl: req.originalUrl, method: req.method }));
 
-    /*
-    //Gestiono conexión con socket clients
-    io.on('connection', async (socket) => {
-
-        //Envío al nuevo socket los productos registrados al momento
-        socket.emit('PRODLIST', await contenedorProd.getAll())
-
-        //Recibo, guardo y retransmito Productos
-        socket.on('NEWPROD', async (data) => {
-            try {
-                let newId = await contenedorProd.saveProducto(data)
-                if (newId) {
-                    io.sockets.emit('PRODLIST', await contenedorProd.getAll());
-                } else {
-                    throw 'Error al guardar nuevo producto'
-                }
-            } catch (error) {
-                logger.error(error)
-            }
-        });
-    });
-
-    //Socket.io Error logging
-    io.engine.on("connection_error", (err) => {
-        // console.log(err.req);    // the request object
-        logger.error(`Socket.io Error -> code: ${err.code}, descr: ${err.message}, sid: ${err.context.sid}`)
-    });
-    */
-
     //Pongo a escuchar al server
     const server = app.listen(PORT, err => {
         if (!err) {
-            logger.info(`Server running. PORT: ${server.address().port}`)
+            logger.info(`Server running at PORT: ${server.address().port} (PID:${process.pid})`)
         }
     });
 

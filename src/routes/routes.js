@@ -1,5 +1,5 @@
 
-import { postCarrito } from '../utils/utils.js'
+import { postCarrito } from '../utils/funcionalidades.js'
 
 import { sendEmail } from "../utils/sendEmail.js"
 

@@ -37,7 +37,12 @@ class CarritosDaoMongo extends ContenedorMongo {
     }
 
     async checkout(cartId) {
-        return await this.model.findByIdAndUpdate(cartId, { activo: false })
+        const result = await this.model.findById(cartId)
+        if (result.productos.length) {
+            return await this.model.findByIdAndUpdate(cartId, { activo: false })
+        } else {
+            return null
+        }
     }
 }
 
